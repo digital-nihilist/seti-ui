@@ -1,0 +1,23 @@
+{
+	"name": "vscode-theme-custom",
+	"private": true,
+	"version": "1.0.0",
+	"displayName": "Custom Theme",
+	"description": "A very real description",
+	"publisher": "me",
+	"license": "MIT",
+	"icon": "./potato.png",
+	"scripts": {
+		"update": "node ./build/update-icon-theme.js"
+	},
+	"engines": { "vscode": "*" },
+	"contributes": {
+		"iconThemes": [
+			{
+				"id": "custom-theme",
+				"label": "Customized Seti (Visual Studio Code)",
+				"path": "./icons/vs-seti-icon-theme.json"
+			}
+		]
+	}
+}
