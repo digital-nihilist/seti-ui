@@ -8,6 +8,7 @@ import { default as mapStream } from 'map-stream'
 import { createVSIX } from 'vsce'
 import { exec } from 'child_process'
 import clean from 'gulp-clean'
+import pug from 'gulp-pug'
 
 const fontName = 'seti'
 
@@ -377,6 +378,15 @@ export function install() {
 	const vs = fs.readdirSync('dist/').find((f) => /\.vsix$/i.test(f))
 
 	return exec(`code --install-extension dist/${vs}`)
+}
+
+export function samplePage() {
+	const sources = fs.readdirSync('src/icons')
+
+	return gulp
+		.src('src/pug/**/*.pug')
+		.pipe(pug({ pretty: true, locals: { sources }, plugins: [] }))
+		.pipe(gulp.dest('build'))
 }
 
 export const compile = gulp.series(cleaner, gulp.parallel(gulp.series(icons, update), pack, staticComponents))
