@@ -15,8 +15,8 @@ function update() {
 			'django-html': 'html',
 		}
 
-	const font = '.dist/icons/seti.woff',
-		fontMappingsFile = '.dist/seti.less',
+	const font = '.dist/theme-seti-custom/icons/seti.woff',
+		fontMappingsFile = '.dist/theme-seti-custom/seti.less',
 		fileAssociationFile = './src/styles/components/icons/mapping.less',
 		colorsFile = './src/styles/ui-variables.less'
 
@@ -136,7 +136,7 @@ function update() {
 			version: '1', //'https://github.com/jesseweed/seti-ui/commit/' + info.commitSha,
 		}
 
-		let path = './.dist/icons/vs-seti-icon-theme.json'
+		let path = './.dist/theme-seti-custom/icons/vs-seti-icon-theme.json'
 		fs.writeFileSync(path, JSON.stringify(res, null, '\t'))
 		console.log('written ' + path)
 	}
@@ -283,7 +283,7 @@ function update() {
 }
 
 function static() {
-	return gulp.src(['src/potato.png', 'src/package.json']).pipe(gulp.dest('.dist/'))
+	return gulp.src(['src/potato.png', 'src/package.json']).pipe(gulp.dest('.dist/theme-seti-custom/'))
 }
 
 function icons() {
@@ -306,7 +306,26 @@ function icons() {
 				formats: ['ttf', 'eot', 'woff', 'woff2', 'svg'],
 			})
 		)
-		.pipe(gulp.dest('.dist/icons'))
+		.pipe(gulp.dest('.dist/theme-seti-custom/icons/'))
+}
+
+function deploy() {
+	const ini = require('ini'),
+		fs = require('fs'),
+		env = fs.existsSync('.env') ? fs.readFileSync('.env') : { user: null, path: null }
+
+	const pathRoot = env.path || env.user ? `C:/Users/${user}/AppData/Local/Programs` : `C:/Program Files`
+
+	console.log('pathRoot', pathRoot)
+
+	return gulp
+		.src('.dist/*') //.pipe(rename('theme-set-custom'))
+		.pipe(
+			//gulp.symlink('output/')
+			gulp.dest(pathRoot + '/Microsoft VS Code/resources/app/extensions/')
+			//gulp.symlink(pathRoot + '/Microsoft VS Code/resources/app/extensions/')
+			//gulp.symlink('C:/Program Files/Microsoft VS Code/resources/app/extensions/theme-seti-custom')
+		)
 }
 
 module.exports = {
@@ -314,4 +333,5 @@ module.exports = {
 	update,
 	static,
 	icons,
+	deploy,
 }
