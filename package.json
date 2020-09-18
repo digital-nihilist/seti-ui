@@ -9,11 +9,10 @@
 	},
 	"main": "dist",
 	"scripts": {
-		"vsce": "vsce package",
-		"build": "gulp all",
-		"deploy": "cmd \".\\deploy.ps1\"",
-		"deploy2": "runas /user:Administrator \"powershell.exe\" \".\\deploy.ps1\"",
-		"employ": "cd dist && code --install-extension seti-ui-extended-1.0.2.vsix"
+		"compile": "gulp compile",
+		"build": "gulp build",
+		"install": "gulp install",
+		"everything": "gulp everything"
 	},
 	"devDependencies": {},
 	"dependencies": {

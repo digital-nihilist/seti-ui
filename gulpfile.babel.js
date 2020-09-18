@@ -7,7 +7,7 @@ import path from 'path'
 import { default as mapStream } from 'map-stream'
 import { createVSIX } from 'vsce'
 import { exec } from 'child_process'
-import { clean } from 'gulp-clean'
+import clean from 'gulp-clean'
 
 const fontName = 'seti'
 
@@ -293,8 +293,8 @@ export function staticComponents() {
 	return gulp.src(['src/potato.png']).pipe(gulp.dest('dist/'))
 }
 
-export function buildPackage() {
-	const pack = {
+export function pack() {
+	const packageJSON = {
 		name: 'seti-ui-extended',
 		private: true,
 		displayName: 'Seti UI Extended',
@@ -324,9 +324,9 @@ export function buildPackage() {
 
 				const keys = ['name', 'repository', 'version', 'license']
 
-				keys.forEach((key) => (pack[key] = basePack[key]))
+				keys.forEach((key) => (packageJSON[key] = basePack[key]))
 
-				file.contents = Buffer.from(JSON.stringify(pack))
+				file.contents = Buffer.from(JSON.stringify(packageJSON))
 				end(null, file)
 			})
 		)
@@ -363,16 +363,17 @@ export function vSix(done) {
 }
 
 export function cleaner() {
-	return gulp.src('dist').pipe(clean())
+	return gulp.src('dist/*', { read: false }).pipe(clean())
 }
 
 export function install() {
-	const vs = fs.readdirSync('dist').find((f) => /\.vsix$/i.test(f))
+	const vs = fs.readdirSync('dist/').find((f) => /\.vsix$/i.test(f))
 
 	return exec(`code --install-extension dist/${vs}`)
-	return exec(`cd dist && code --install-extension ${vs}`)
 }
 
-export const compile = gulp.parallel(gulp.series(icons, update), buildPackage, staticComponents)
+export const compile = gulp.series(cleaner, gulp.parallel(gulp.series(icons, update), pack, staticComponents))
 
-export const build = gulp.series(compile, buildPackage)
+export const build = gulp.series(compile, vSix)
+
+export const everything = gulp.series(build, install)
