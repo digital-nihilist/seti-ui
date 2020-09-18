@@ -159,10 +159,17 @@ export function update() {
 	}
 
 	function getLanguageMappings() {
-		const langMappings = {},
-			location = 'C:/Program Files/Microsoft VS Code/resources/app/extensions',
-			//location = '..',
+		const langMappings = {}
+		var allExtensions,
+			location = 'C:/Program Files/Microsoft VS Code/resources/app/extensions'
+		//location = '..',
+		console.log(path.join(process.env.LOCALAPPDATA, 'Programs/Microsoft VS Code/resources/app/extensions'))
+		try {
 			allExtensions = fs.readdirSync(location)
+		} catch (error) {
+			location = path.join(process.env.LOCALAPPDATA, 'Programs/Microsoft VS Code/resources/app/extensions')
+			allExtensions = fs.readdirSync(location)
+		}
 		for (let i = 0; i < allExtensions.length; i++) {
 			const dirPath = path.join(location, allExtensions[i], 'package.json')
 			if (fs.existsSync(dirPath)) {
