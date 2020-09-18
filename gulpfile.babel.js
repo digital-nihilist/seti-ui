@@ -1,22 +1,25 @@
-var fontName = 'seti',
-	gulp = require('gulp'),
-	iconfont = require('gulp-iconfont'),
-	iconfontCss = require('gulp-iconfont-css'),
-	svgmin = require('gulp-svgmin')
+import gulp from 'gulp'
+import iconfont from 'gulp-iconfont'
+import iconfontCss from 'gulp-iconfont-css'
+import svgmin from 'gulp-svgmin'
+import fs from 'fs'
+import path from 'path'
+import { default as mapStream } from 'map-stream'
+import { createVSIX } from 'vsce'
+import { exec } from 'child_process'
+import { clean } from 'gulp-clean'
 
-//const {update} = require('./update-icon-theme.js')
+const fontName = 'seti'
 
-function update() {
-	const path = require('path'),
-		fs = require('fs'),
-		inheritIconFromLanguage = {
-			jsonc: 'json',
-			postcss: 'css',
-			'django-html': 'html',
-		}
+export function update() {
+	const inheritIconFromLanguage = {
+		jsonc: 'json',
+		postcss: 'css',
+		'django-html': 'html',
+	}
 
-	const font = '.dist/theme-seti-custom/icons/seti.woff',
-		fontMappingsFile = '.dist/theme-seti-custom/seti.less',
+	const font = 'dist/icons/seti.woff',
+		fontMappingsFile = 'dist/seti.less',
 		fileAssociationFile = './src/styles/components/icons/mapping.less',
 		colorsFile = './src/styles/ui-variables.less'
 
@@ -136,7 +139,7 @@ function update() {
 			version: '1', //'https://github.com/jesseweed/seti-ui/commit/' + info.commitSha,
 		}
 
-		let path = './.dist/theme-seti-custom/icons/vs-seti-icon-theme.json'
+		let path = './dist/icons/seti-ui-extended.json'
 		fs.writeFileSync(path, JSON.stringify(res, null, '\t'))
 		console.log('written ' + path)
 	}
@@ -156,26 +159,29 @@ function update() {
 	}
 
 	function getLanguageMappings() {
-		let langMappings = {}
-		let allExtensions = fs.readdirSync('..')
+		const langMappings = {},
+			location = 'C:/Program Files/Microsoft VS Code/resources/app/extensions',
+			//location = '..',
+			allExtensions = fs.readdirSync(location)
 		for (let i = 0; i < allExtensions.length; i++) {
-			let dirPath = path.join('..', allExtensions[i], 'package.json')
+			const dirPath = path.join(location, allExtensions[i], 'package.json')
 			if (fs.existsSync(dirPath)) {
-				let content = fs.readFileSync(dirPath).toString()
-				let jsonContent = JSON.parse(content)
-				let languages = jsonContent.contributes && jsonContent.contributes.languages
+				const jsonContent = JSON.parse(fs.readFileSync(dirPath)),
+					languages = jsonContent.contributes && jsonContent.contributes.languages
+
 				if (Array.isArray(languages)) {
 					for (let k = 0; k < languages.length; k++) {
-						let languageId = languages[k].id
+						const languageId = languages[k].id
 						if (languageId) {
-							let extensions = languages[k].extensions
-							let mapping = {}
+							const extensions = languages[k].extensions,
+								mapping = {}
 							if (Array.isArray(extensions)) {
 								mapping.extensions = extensions.map(function (e) {
 									return e.substr(1).toLowerCase()
 								})
 							}
-							let filenames = languages[k].filenames
+
+							const filenames = languages[k].filenames
 							if (Array.isArray(filenames)) {
 								mapping.fileNames = filenames.map(function (f) {
 									return f.toLowerCase()
@@ -187,6 +193,7 @@ function update() {
 				}
 			}
 		}
+
 		for (let languageId in nonBuiltInLanguages) {
 			langMappings[languageId] = nonBuiltInLanguages[languageId]
 		}
@@ -282,11 +289,51 @@ function update() {
 	}, console.error)
 }
 
-function static() {
-	return gulp.src(['src/potato.png', 'src/package.json']).pipe(gulp.dest('.dist/theme-seti-custom/'))
+export function staticComponents() {
+	return gulp.src(['src/potato.png']).pipe(gulp.dest('dist/'))
 }
 
-function icons() {
+export function buildPackage() {
+	const pack = {
+		name: 'seti-ui-extended',
+		private: true,
+		displayName: 'Seti UI Extended',
+		description: 'A very real description',
+		publisher: 'me',
+		icon: 'potato.png',
+		engines: {
+			vscode: '*',
+		},
+		theme: 'ui',
+		contributes: {
+			iconThemes: [
+				{
+					id: 'seti-extended',
+					label: 'Seti Extended',
+					path: './icons/seti-ui-extended.json',
+				},
+			],
+		},
+	}
+
+	return gulp
+		.src('package.json')
+		.pipe(
+			mapStream((file, end) => {
+				const basePack = JSON.parse(file.contents)
+
+				const keys = ['name', 'repository', 'version', 'license']
+
+				keys.forEach((key) => (pack[key] = basePack[key]))
+
+				file.contents = Buffer.from(JSON.stringify(pack))
+				end(null, file)
+			})
+		)
+		.pipe(gulp.dest('dist/'))
+}
+
+export function icons() {
 	return gulp
 		.src('src/icons/*.svg')
 		.pipe(svgmin())
@@ -306,32 +353,26 @@ function icons() {
 				formats: ['ttf', 'eot', 'woff', 'woff2', 'svg'],
 			})
 		)
-		.pipe(gulp.dest('.dist/theme-seti-custom/icons/'))
+		.pipe(gulp.dest('dist/icons/'))
 }
 
-function deploy() {
-	const ini = require('ini'),
-		fs = require('fs'),
-		env = fs.existsSync('.env') ? fs.readFileSync('.env') : { user: null, path: null }
-
-	const pathRoot = env.path || env.user ? `C:/Users/${user}/AppData/Local/Programs` : `C:/Program Files`
-
-	console.log('pathRoot', pathRoot)
-
-	return gulp
-		.src('.dist/*') //.pipe(rename('theme-set-custom'))
-		.pipe(
-			//gulp.symlink('output/')
-			gulp.dest(pathRoot + '/Microsoft VS Code/resources/app/extensions/')
-			//gulp.symlink(pathRoot + '/Microsoft VS Code/resources/app/extensions/')
-			//gulp.symlink('C:/Program Files/Microsoft VS Code/resources/app/extensions/theme-seti-custom')
-		)
+export function vSix(done) {
+	createVSIX({
+		cwd: './dist/',
+	}).then(done)
 }
 
-module.exports = {
-	all: gulp.parallel(update, static, icons),
-	update,
-	static,
-	icons,
-	deploy,
+export function cleaner() {
+	return gulp.src('dist').pipe(clean())
 }
+
+export function install() {
+	const vs = fs.readdirSync('dist').find((f) => /\.vsix$/i.test(f))
+
+	return exec(`code --install-extension dist/${vs}`)
+	return exec(`cd dist && code --install-extension ${vs}`)
+}
+
+export const compile = gulp.parallel(gulp.series(icons, update), buildPackage, staticComponents)
+
+export const build = gulp.series(compile, buildPackage)

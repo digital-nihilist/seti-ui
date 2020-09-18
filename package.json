@@ -1,102 +1,33 @@
 {
-	"name": "seti-ui",
-	"theme": "ui",
-	"version": "1.11.0",
-	"description": "A dark colored UI theme for Atom with custom file icons.",
+	"name": "seti-ui-extended",
+	"version": "1.0.2",
+	"description": "A very real description",
 	"license": "MIT",
-	"repository": "https://github.com/jesseweed/seti-ui",
+	"repository": "https://github.com/digital-nihilist/seti-ui",
 	"engines": {
-		"atom": ">1.13.0"
+		"vscode": "*"
 	},
-	"main": "lib/main",
+	"main": "dist",
 	"scripts": {
+		"vsce": "vsce package",
 		"build": "gulp all",
 		"deploy": "cmd \".\\deploy.ps1\"",
-		"deploy2": "runas /user:Administrator \"powershell.exe\" \".\\deploy.ps1\""
+		"deploy2": "runas /user:Administrator \"powershell.exe\" \".\\deploy.ps1\"",
+		"employ": "cd dist && code --install-extension seti-ui-extended-1.0.2.vsix"
 	},
-	"configSchema": {
-		"themeColor": {
-			"title": "Theme Color",
-			"order": 1,
-			"description": "Select a default theme color. If you don't notice a difference, you may have to reload Atom to see them.",
-			"type": "string",
-			"enum": [
-				"Blue",
-				"Green",
-				"Orange",
-				"Pink",
-				"Purple",
-				"Red",
-				"Steel",
-				"Yellow"
-			],
-			"default": "Blue"
-		},
-		"compactView": {
-			"title": "Compact Mode",
-			"order": 3,
-			"description": "Enable this is you prefer less padding in your workspace.",
-			"type": "boolean",
-			"default": false
-		},
-		"disableAnimations": {
-			"title": "Disable Animations",
-			"order": 4,
-			"description": "Select this if you want to disable animations.",
-			"type": "boolean",
-			"default": false
-		},
-		"fileIcons": {
-			"title": "Custom Icons",
-			"order": 5,
-			"description": "Disable this if you are using file-icons or another atom file icon package (or simply don't want custom icons)",
-			"type": "boolean",
-			"default": true
-		},
-		"displayIgnored": {
-			"title": "Display Ignored Files",
-			"order": 6,
-			"description": "Enable this if you would like to not see ignored files at all (as opposed to simple muting the style)",
-			"type": "boolean",
-			"default": true
-		},
-		"hideTabs": {
-			"title": "Hide Tabs",
-			"order": 7,
-			"description": "Enable this if you prefer to rely on the sidebar for nagivation and don't want to see tabs at all.",
-			"type": "boolean",
-			"default": false
-		},
-		"hideDocumentTitle": {
-			"title": "Hide Current Document Title",
-			"order": 8,
-			"description": "Enable this if you want to hide the main window title",
-			"type": "boolean",
-			"default": false
-		},
-		"hideTitleBar": {
-			"title": "Hide Title Bar",
-			"order": 9,
-			"description": "Enable this if you want to completely hide the main window title bar",
-			"type": "boolean",
-			"default": false
-		},
-		"hideProjectTab": {
-			"title": "Hide Project Tab",
-			"order": 10,
-			"description": "Enable this if you want to remove the 'project' tab from the sidebar",
-			"type": "boolean",
-			"default": false
-		}
-	},
-	"devDependencies": {
+	"devDependencies": {},
+	"dependencies": {
+		"@babel/core": "^7.11.6",
+		"@babel/preset-env": "^7.11.5",
+		"@babel/register": "^7.11.5",
 		"gulp": "^4.0.2",
+		"gulp-clean": "^0.4.0",
 		"gulp-iconfont": "8.0.1",
 		"gulp-iconfont-css": "^2.1.0",
-		"gulp-svgmin": "^1.2.3"
-	},
-	"dependencies": {
+		"gulp-svgmin": "^1.2.3",
 		"ini": "^1.3.5",
-		"lodash": "^4.17.20"
+		"lodash": "^4.17.20",
+		"map-stream": "0.0.7",
+		"vsce": "^1.79.5"
 	}
 }

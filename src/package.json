@@ -1,13 +1,16 @@
 {
-	"name": "vscode-theme-custom",
+	"name": "seti-ui-extended",
 	"private": true,
 	"version": "1.0.2",
-	"displayName": "Custom Theme",
+	"displayName": "Seti UI Extended",
 	"description": "A very real description",
 	"publisher": "me",
 	"license": "MIT",
-	"icon": "./potato.png",
-	"engines": { "vscode": "*" },
+	"icon": "potato.png",
+	"engines": {
+		"vscode": "*"
+	},
+	"repository": "https://github.com/digital-nihilist/seti-ui/",
 	"contributes": {
 		"iconThemes": [
 			{

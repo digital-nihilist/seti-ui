@@ -1,1 +1,0 @@
-New-Item -ItemType SymbolicLink -Path 'C:\Program Files\Microsoft VS Code\resources\app\extensions' -Name theme-custom -Value E:\Code\seti-ui\.dist
