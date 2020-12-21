@@ -27,17 +27,29 @@
 	content: @@filename;
 }
 
-.<%= cssClass%>(@filename, @color: @white, @insert: before) {
-	@pseudo-selector: ~':@{insert}';
 
-	&@{pseudo-selector} {
-		&:extend(.<%= cssClass%>-base-pseudo);
-		.<%= cssClass%>-char(@filename);
-		color: @color;
+@function <%= cssClass%>-char($filename) {
+	$char: "";
+<% _.each(glyphs, function(glyph) { %>
+	@if $filename == <%= glyph.fileName %> {
+		$char: "\<%= glyph.codePoint %>";
+	}<% }); %>
+
+	@return $char;
+}
+
+@mixin <%= cssClass%>($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend {
+			@extend %<%= cssClass%>;
+		} @else {
+			@include <%= cssClass%>-styles;
+		}
+		content: <%= cssClass%>-char($filename);
 	}
 }
 
 <% _.each(glyphs, function(glyph) { %>.<%= cssClass%>-<%= glyph.fileName %> {
-	.<%= cssClass%>(<%= glyph.fileName %>);
+	@include <%= cssClass%>(<%= glyph.originalFileName ? glyph.originalFileName : glyph.fileName %>);
 }
 <% }); %>

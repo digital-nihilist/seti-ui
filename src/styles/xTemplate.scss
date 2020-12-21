@@ -1,0 +1,71 @@
+{
+	"information_for_contributors": [
+		"This file has been generated from data in https://github.com/jesseweed/seti-ui"
+	],
+	"fonts": [
+		{
+			"id": "seti",
+			"src": [
+				{
+					"path": "./seti.woff",
+					"format": "woff"
+				}
+			],
+			"weight": "normal",
+			"style": "normal",
+			"size": "150%"
+		}
+	],
+	"iconDefinitions": {},
+	"file": "_default",
+	"fileExtensions": {},
+	"fileNames": {},
+	"languageIds": {},
+	"light": {
+		"file": "_default_light",
+		"fileExtensions": {},
+		"languageIds": {},
+		"fileNames": {}
+	},
+	"version": "1"
+}
+
+%<%= cssClass%> {
+	@include <%= cssClass%>-styles;
+}
+
+<% _.each(glyphs, function(glyph) { %>
+	"<%= glyph.fileName %>": "\<%= glyph.codePoint %>",
+
+	
+	"glyph.fileName": {
+		"fontCharacter": "\\E072",
+		"fontColor": "#498ba7"
+	},
+<% }); %>
+
+@function <%= cssClass%>-char($filename) {
+	$char: "";
+<% _.each(glyphs, function(glyph) { %>
+	@if $filename == <%= glyph.fileName %> {
+		$char: "\<%= glyph.codePoint %>";
+	}<% }); %>
+
+	@return $char;
+}
+
+@mixin <%= cssClass%>($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend {
+			@extend %<%= cssClass%>;
+		} @else {
+			@include <%= cssClass%>-styles;
+		}
+		content: <%= cssClass%>-char($filename);
+	}
+}
+
+<% _.each(glyphs, function(glyph) { %>.<%= cssClass%>-<%= glyph.fileName %> {
+	@include <%= cssClass%>(<%= glyph.originalFileName ? glyph.originalFileName : glyph.fileName %>);
+}
+<% }); %>

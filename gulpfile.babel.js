@@ -10,6 +10,9 @@ import { exec } from 'child_process'
 import clean from 'gulp-clean'
 import pug from 'gulp-pug'
 
+import sass from 'gulp-sass'
+import autoprefixer from 'gulp-autoprefixer'
+
 const fontName = 'seti'
 
 export function update() {
@@ -19,9 +22,8 @@ export function update() {
 		'django-html': 'html',
 	}
 
-	const font = 'dist/icons/seti.woff',
-		fontMappingsFile = 'dist/seti.less',
-		fileAssociationFile = './src/styles/components/icons/mapping.less',
+	const fontMappingsFile = 'dist/seti.less',
+		fileAssociationFile = './src/styles/icon-map.less',
 		colorsFile = './src/styles/ui-variables.less'
 
 	// list of languagesId not shipped with VSCode. The information is used to associate an icon with a language association
@@ -348,9 +350,8 @@ export function icons() {
 		.pipe(
 			iconfontCss({
 				fontName: fontName,
-				path: 'src/styleTest/_template.less',
+				path: 'src/styles/_template.less',
 				targetPath: '../seti.less',
-				fontPath: 'styles/styleTest/seti/',
 			})
 		)
 		.pipe(
@@ -362,6 +363,48 @@ export function icons() {
 			})
 		)
 		.pipe(gulp.dest('dist/icons/'))
+}
+
+export function css() {
+	return gulp
+		.src('src/styles/x-icon-map.less')
+		.pipe(
+			sass({
+				errLogToConsole: true,
+				outputStyle: 'expanded',
+			})
+		)
+		.on('error', sass.logError)
+		.pipe(gulp.dest('dist/icons/'))
+	return (
+		gulp
+			.src('src/icons/*.svg')
+			.pipe(svgmin())
+			.pipe(
+				iconfontCss({
+					fontName: fontName,
+					//path: 'src/styles/xTemplate.less',
+					path: 'src/styles/_template.less',
+					targetPath: '../seti.less',
+				})
+			)
+			.pipe(
+				iconfont({
+					normalize: true,
+					fontHeight: 1000,
+					fontName: fontName,
+					formats: ['ttf', 'eot', 'woff', 'woff2', 'svg'],
+				})
+			) /*
+			.pipe(
+				sass({
+					errLogToConsole: true,
+					outputStyle: 'expanded',
+				}).on('error', sass.logError)
+			)*/
+			//.pipe(autoprefixer())
+			.pipe(gulp.dest('dist/icons/'))
+	)
 }
 
 export function vSix(done) {

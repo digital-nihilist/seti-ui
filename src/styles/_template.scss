@@ -10,7 +10,7 @@
 		font-style: normal;
 }
 
-.<%= cssClass%>-base-pseudo {
+@mixin <%= cssClass%>-styles {
 	font-family: '<%= fontName %>';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -21,23 +21,32 @@
 	text-transform: none;
 }
 
-.<%= cssClass%>-char(@filename) {
-	<% _.each(glyphs, function(glyph) { %>@<%= glyph.fileName %>: '\<%= glyph.codePoint %>';
-	<% }); %>
-	content: @@filename;
+%<%= cssClass%> {
+	@include <%= cssClass%>-styles;
 }
 
-.<%= cssClass%>(@filename, @color: @white, @insert: before) {
-	@pseudo-selector: ~':@{insert}';
+@function <%= cssClass%>-char($filename) {
+	$char: "";
+<% _.each(glyphs, function(glyph) { %>
+	@if $filename == <%= glyph.fileName %> {
+		$char: "\<%= glyph.codePoint %>";
+	}<% }); %>
 
-	&@{pseudo-selector} {
-		&:extend(.<%= cssClass%>-base-pseudo);
-		.<%= cssClass%>-char(@filename);
-		color: @color;
+	@return $char;
+}
+
+@mixin <%= cssClass%>($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend {
+			@extend %<%= cssClass%>;
+		} @else {
+			@include <%= cssClass%>-styles;
+		}
+		content: <%= cssClass%>-char($filename);
 	}
 }
 
 <% _.each(glyphs, function(glyph) { %>.<%= cssClass%>-<%= glyph.fileName %> {
-	.<%= cssClass%>(<%= glyph.fileName %>);
+	@include <%= cssClass%>(<%= glyph.originalFileName ? glyph.originalFileName : glyph.fileName %>);
 }
 <% }); %>

@@ -1,0 +1,645 @@
+// - - - - - - - - - - - - - -
+// LANGUAGES - EXTENSION BASED
+// - - - - - - - - - - - - - -
+
+@mixin icon-styles {
+	font-family: 'seti';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+}
+
+%icon {
+	@include icon-styles;
+}
+
+// DEFAULT ICON
+.icon-file-binary,
+.icon-file-pdf,
+.icon-file-text,
+.icon-book,
+.icon-file-media,
+.icon-markdown,
+.title {
+	@include icon('default', $white);
+}
+
+// 1C:Enterprise
+@include icon-set('.bsl', 'bsl', $red);
+@include icon-set('.mdo', 'mdo', $red);
+
+// Assembly
+@include icon-set('.asm', 'asm', $red);
+@include icon-set('.s', 'asm', $red);
+
+// C
+@include icon-set('.c', 'c', $blue);
+@include icon-set('.h', 'c', $purple);
+@include icon-set('.m', 'c', $yellow);
+
+// C♯
+@include icon-set('.cs', 'c-sharp', $blue);
+@include icon-set('.cshtml', 'html', $blue);
+@include icon-set('.aspx', 'html', $blue);
+@include icon-set('.ascx', 'html', $green);
+@include icon-set('.asax', 'html', $yellow);
+@include icon-set('.master', 'html', $yellow);
+
+// C++
+@include icon-set('.cc', 'cpp', $blue);
+@include icon-set('.cpp', 'cpp', $blue);
+@include icon-set('.cxx', 'cpp', $blue);
+@include icon-set('.c++', 'cpp', $blue);
+@include icon-set('.hh', 'cpp', $purple);
+@include icon-set('.hpp', 'cpp', $purple);
+@include icon-set('.hxx', 'cpp', $purple);
+@include icon-set('.h++', 'cpp', $purple);
+@include icon-set('.mm', 'cpp', $yellow);
+
+// Clojure
+@include icon-set('.clj', 'clojure', $green);
+@include icon-set('.cljs', 'clojure', $green);
+@include icon-set('.cljc', 'clojure', $green);
+@include icon-set('.edn', 'clojure', $blue);
+
+// COLDFUSION
+@include icon-set('.cfc', 'coldfusion', $blue);
+@include icon-set('.cfm', 'coldfusion', $blue);
+
+// COFFEESCRIPT
+@include icon-set('.coffee', 'coffee', $yellow);
+@include icon-set('.litcoffee', 'coffee', $yellow);
+
+// CONFIG
+@include icon-set('.config', 'config', $grey-light);
+@include icon-set('.cfg', 'config', $grey-light);
+@include icon-set('.conf', 'config', $grey-light);
+
+// CRYSTAL
+@include icon-set('.cr', 'crystal', $white);
+@include icon-set('.ecr', 'crystal_embedded', $white);
+@include icon-set('.slang', 'crystal_embedded', $white);
+
+// CSON
+@include icon-set('.cson', 'json', $yellow);
+
+// CSS
+@include icon-set('.css', 'css', $blue);
+@include icon-set('.css.map', 'css', $blue);
+@include icon-set('.sss', 'css', $blue);
+
+// CSV
+@include icon-set('.csv', 'csv', $green);
+@include icon-set('.xls', 'xls', $green);
+@include icon-set('.xlsx', 'xls', $green);
+
+// CUDA
+@include icon-set('.cu', 'cu', $green);
+@include icon-set('.cuh', 'cu', $purple);
+@include icon-set('.hu', 'cu', $purple);
+
+// CAKE
+@include icon-set('.cake', 'cake', $red);
+@include icon-set('.ctp', 'cake_php', $red);
+
+// D
+@include icon-set('.d', 'd', $red);
+
+// DOC
+@include icon-set('.doc', 'word', $blue);
+@include icon-set('.docx', 'word', $blue);
+
+// EJS
+@include icon-set('.ejs', 'ejs', $yellow);
+
+// ELIXIR
+@include icon-set('.ex', 'elixir', $purple);
+@include icon-set('.exs', 'elixir_script', $purple);
+@include icon-partial('mix', 'hex', $red);
+
+// ELM
+@include icon-set('.elm', 'elm', $blue);
+
+// FAVICON
+@include icon-set('.ico', 'favicon', $yellow);
+
+// F#
+@include icon-set('.fs', 'f-sharp', $blue);
+@include icon-set('.fsx', 'f-sharp', $blue);
+
+// GITIGNORE
+@include icon-set('.gitignore', 'git', $ignore);
+@include icon-set('.gitconfig', 'git', $ignore);
+@include icon-set('.gitkeep', 'git', $ignore);
+@include icon-set('.gitattributes', 'git', $ignore);
+@include icon-set('.gitmodules', 'git', $ignore);
+
+// GO
+@include icon-set('.go', 'go2', $blue);
+@include icon-set('.slide', 'go', $blue);
+@include icon-set('.article', 'go', $blue);
+
+// GRADLE
+@include icon-set('.gradle', 'gradle', $green);
+
+// GRAILS
+@include icon-set('.groovy', 'grails', $green);
+@include icon-set('.gsp', 'grails', $green);
+
+// GRAPHQL
+@include icon-set('.gql', 'graphql', $pink);
+@include icon-set('.graphql', 'graphql', $pink);
+
+// HAML
+@include icon-set('.haml', 'haml', $red);
+
+// HANDLEBARS
+@include icon-set('.handlebars', 'mustache', $orange);
+@include icon-set('.hbs', 'mustache', $orange);
+@include icon-set('.hjs', 'mustache', $orange);
+
+// HASKELL
+@include icon-set('.hs', 'haskell', $purple);
+@include icon-set('.lhs', 'haskell', $purple);
+
+// HAXE
+@include icon-set('.hx', 'haxe', $orange);
+@include icon-set('.hxs', 'haxe', $yellow);
+@include icon-set('.hxp', 'haxe', $blue);
+@include icon-set('.hxml', 'haxe', $purple);
+
+// HTML
+@include icon-set('.html', 'html', $orange);
+
+// JADE
+@include icon-set('.jade', 'jade', $red);
+
+// JAVA
+@include icon-set('.java', 'java', $red);
+@include icon-set('.class', 'java', $red);
+@include icon-set('.classpath', 'java', $red);
+@include icon-set('.properties', 'java', $red);
+
+// JAVASCRIPT
+@include icon-set('.js', 'javascript', $yellow);
+@include icon-set('.js.map', 'javascript', $yellow);
+@include icon-set('.spec.js', 'javascript', $orange);
+@include icon-set('.test.js', 'javascript', $orange);
+@include icon-set('.es', 'javascript', $yellow);
+@include icon-set('.es5', 'javascript', $yellow);
+@include icon-set('.es6', 'javascript', $yellow);
+@include icon-set('.es7', 'javascript', $yellow);
+
+// JINJA
+@include icon-set('.jinja', 'jinja', $red);
+@include icon-set('.jinja2', 'jinja', $red);
+
+// JSON
+@include icon-set('.json', 'json', $yellow);
+
+// JULIA
+@include icon-set('.jl', 'julia', $purple);
+
+// KARMA
+@include icon-set('karma.conf.js', 'karma', $green);
+@include icon-set('karma.conf.coffee', 'karma', $green);
+
+// KOTLIN
+@include icon-set('.kt', 'kotlin', $orange);
+@include icon-set('.kts', 'kotlin', $orange);
+
+// DART
+@include icon-set('.dart', 'dart', $blue);
+
+// LESS
+@include icon-set('.less', 'less', $blue);
+
+// LIQUID
+@include icon-set('.liquid', 'liquid', $green);
+
+// LIVESCRIPT
+@include icon-set('.ls', 'livescript', $blue);
+
+// LUA
+@include icon-set('.lua', 'lua', $blue);
+
+// MARKDOWN
+@include icon-set('.markdown', 'markdown', $blue);
+@include icon-set('.md', 'markdown', $blue);
+
+// ARGDOWN
+@include icon-set('.argdown', 'argdown', $blue);
+@include icon-set('.ad', 'argdown', $blue);
+
+// README
+@include icon-set('README.md', 'info', $blue);
+
+// CHANGELOG
+@include icon-set('CHANGELOG.md', 'clock', $blue);
+@include icon-set('CHANGELOG', 'clock', $blue);
+@include icon-set('CHANGES.md', 'clock', $blue);
+@include icon-set('VERSION.md', 'clock', $blue);
+@include icon-set('VERSION', 'clock', $blue);
+
+// MAVEN
+@include icon-set('mvnw', 'maven', $red);
+
+// MUSTACHE
+@include icon-set('.mustache', 'mustache', $orange);
+@include icon-set('.stache', 'mustache', $orange);
+
+// NPM
+@include icon-set('.njk', 'nunjucks', $green);
+@include icon-set('.nunjucks', 'nunjucks', $green);
+@include icon-set('.nunjs', 'nunjucks', $green);
+@include icon-set('.nunj', 'nunjucks', $green);
+@include icon-set('.njs', 'nunjucks', $green);
+@include icon-set('.nj', 'nunjucks', $green);
+
+// NPM
+@include icon-set('.npm-debug.log', 'npm', $ignore);
+@include icon-set('.npmignore', 'npm', $red);
+@include icon-set('.npmrc', 'npm', $red);
+
+// OCAML
+@include icon-set('.ml', 'ocaml', $orange);
+@include icon-set('.mli', 'ocaml', $orange);
+@include icon-set('.cmx', 'ocaml', $orange);
+@include icon-set('.cmxa', 'ocaml', $orange);
+
+// ODATA
+@include icon-set('.odata', 'odata', $orange);
+
+// PERL
+@include icon-set('.pl', 'perl', $blue);
+
+// PHP
+@include icon-set('.php', 'php', $purple);
+@include icon-set('.php.inc', 'php', $purple);
+
+// PLANNING
+@include icon-set('.pddl', 'pddl', $purple);
+@include icon-set('.plan', 'plan', $green);
+@include icon-set('.happenings', 'happenings', $blue);
+
+// POWERSHELL
+@include icon-set('.ps1', 'powershell', $blue);
+@include icon-set('.psd1', 'powershell', $blue);
+@include icon-set('.psm1', 'powershell', $blue);
+
+// PUG
+@include icon-set('.pug', 'pug', $red);
+@include icon-set('.vue.pug', 'pug', $red);
+@include icon-set('.v-pug', 'pug', $red);
+@include icon-set('.vue-pug', 'pug', $red);
+@include icon-set('.vpug', 'pug', $red);
+
+// PUPPET .pp
+@include icon-set('.pp', 'puppet', $yellow);
+@include icon-set('.epp', 'puppet', $yellow);
+
+// PYTHON
+@include icon-set('.py', 'python', $blue);
+
+// REACT
+@include icon-set('.jsx', 'react', $blue);
+@include icon-set('.spec.jsx', 'react', $orange);
+@include icon-set('.test.jsx', 'react', $orange);
+@include icon-set('.cjsx', 'react', $blue);
+@include icon-set('.spec.tsx', 'react', $yellow);
+@include icon-set('.test.tsx', 'react', $yellow);
+
+// REASONML
+@include icon-set('.re', 'reasonml', $red);
+
+// R
+@include icon-set('.R', 'R', $blue);
+@include icon-set('.rmd', 'R', $blue);
+
+// RUBY
+@include icon-set('.rb', 'ruby', $red);
+@include icon-set('.erb', 'html_erb', $red);
+@include icon-set('.erb.html', 'html_erb', $red);
+@include icon-set('.html.erb', 'html_erb', $red);
+
+// RUST
+@include icon-set('.rs', 'rust', $grey-light);
+
+// SASS
+@include icon-set('.sass', 'sass', $pink);
+@include icon-set('.scss', 'sass', $pink);
+
+// SPRING
+@include icon-set('.springBeans', 'spring', $green);
+
+// SLIM
+@include icon-set('.slim', 'slim', $orange);
+
+// SMARTY
+@include icon-set('.smarty.tpl', 'smarty', $yellow);
+
+// SBT
+@include icon-set('.sbt', 'sbt', $blue);
+
+// SCALA
+@include icon-set('.scala', 'scala', $red);
+
+// SCALA
+@include icon-set('.sol', 'ethereum', $blue);
+
+// STYLUS
+@include icon-set('.styl', 'stylus', $green);
+
+// SWIFT
+@include icon-set('.swift', 'swift', $orange);
+
+// SQL
+@include icon-set('.sql', 'db', $pink);
+
+// SVELTE
+@include icon-set('.svelte', 'svelte', $orange);
+
+// TERRAFORM
+@include icon-set('.tf', 'terraform', $purple);
+@include icon-set('.tf.json', 'terraform', $purple);
+@include icon-set('.tfvars', 'terraform', $purple);
+
+// TEX
+@include icon-set('.tex', 'tex', $blue);
+@include icon-set('.sty', 'tex', $yellow);
+@include icon-set('.dtx', 'tex', $orange);
+@include icon-set('.ins', 'tex', $white);
+
+// TEXT
+@include icon-set('.txt', 'default', $white);
+
+// TOML
+@include icon-set('.toml', 'config', $grey-light);
+
+// TWIG
+@include icon-set('.twig', 'twig', $green);
+
+// TYPESCRIPT
+@include icon-set('.ts', 'typescript', $blue);
+@include icon-set('.tsx', 'typescript', $blue);
+@include icon-set('.spec.ts', 'typescript', $yellow);
+@include icon-set('.test.ts', 'typescript', $yellow);
+
+// TSCONFIG
+@include icon-set('tsconfig.json', 'tsconfig', $blue);
+
+// VALA
+@include icon-set('.vala', 'vala', $grey-light);
+@include icon-set('.vapi', 'vala', $grey-light);
+
+// VUE
+@include icon-set('.vue', 'vue', $green);
+@include icon-set('.pug.vue', 'pug', $red);
+
+// WEBASSEMBLY
+@include icon-set('.wasm', 'wasm', $purple);
+@include icon-set('.wat', 'wat', $purple);
+
+// XML
+@include icon-set('.xml', 'xml', $orange);
+
+// YML
+@include icon-set('.yml', 'yml', $purple);
+@include icon-set('.yaml', 'yml', $purple);
+
+// SWAGGER
+@include icon-set('swagger.json', 'json', $green);
+@include icon-set('swagger.yml', 'json', $green);
+@include icon-set('swagger.yaml', 'json', $green);
+
+// PROLOG
+@include icon-set('.pro', 'prolog', $orange);
+
+// - - - - - - - - - - - - - - - - - - -
+//  GENERIC FILE TYPES - EXTENSION BASED
+// - - - - - - - - - - - - - - - - - - -
+
+// ARCHIVES
+@include icon-set('.jar', 'zip', $red);
+@include icon-set('.zip', 'zip', $grey-light);
+@include icon-set('.wgt', 'wgt', $blue);
+
+// ADOBE FILE
+@include icon-set('.ai', 'illustrator', $yellow);
+@include icon-set('.psd', 'photoshop', $blue);
+@include icon-set('.pdf', 'pdf', $red);
+
+// FONT FILES
+@include icon-set('.eot', 'font', $red);
+@include icon-set('.ttf', 'font', $red);
+@include icon-set('.woff', 'font', $red);
+@include icon-set('.woff2', 'font', $red);
+
+// IMAGE FILES
+@include icon-set('.gif', 'image', $purple);
+@include icon-set('.jpg', 'image', $purple);
+@include icon-set('.jpeg', 'image', $purple);
+@include icon-set('.png', 'image', $purple);
+@include icon-set('.pxm', 'image', $purple);
+@include icon-set('.svg', 'svg', $purple);
+@include icon-set('.svgx', 'image', $purple);
+@include icon-set('.tiff', 'image', $purple);
+@include icon-set('.webp', 'image', $purple);
+
+// SUBLIME
+@include icon-set('.sublime-project', 'sublime', $orange);
+@include icon-set('.sublime-workspace', 'sublime', $orange);
+
+// VS CODE
+@include icon-set('.code-search', 'code-search', $purple);
+
+// SALESFORCE
+@include icon-set('.component', 'salesforce', $blue);
+@include icon-set('.cls', 'salesforce', $blue);
+
+// SHELL
+@include icon-set('.sh', 'shell', $grey);
+@include icon-set('.zsh', 'shell', $grey);
+@include icon-set('.fish', 'shell', $grey);
+@include icon-set('.zshrc', 'shell', $grey);
+@include icon-set('.bashrc', 'shell', $grey);
+
+// VIDEO FILES
+@include icon-set('.mov', 'video', $pink);
+@include icon-set('.ogv', 'video', $pink);
+@include icon-set('.webm', 'video', $pink);
+@include icon-set('.avi', 'video', $pink);
+@include icon-set('.mpg', 'video', $pink);
+@include icon-set('.mp4', 'video', $pink);
+
+// AUDIO FILES
+@include icon-set('.mp3', 'audio', $purple);
+@include icon-set('.ogg', 'audio', $purple);
+@include icon-set('.wav', 'audio', $purple);
+@include icon-set('.flac', 'audio', $purple);
+
+// 3D files
+@include icon-set('.3ds', 'svg', $blue);
+@include icon-set('.3dm', 'svg', $blue);
+@include icon-set('.stl', 'svg', $blue);
+@include icon-set('.obj', 'svg', $blue);
+@include icon-set('.dae', 'svg', $blue);
+
+// WINDOWS
+@include icon-set('.bat', 'windows', $blue);
+@include icon-set('.cmd', 'windows', $blue);
+
+// - - - - - - - - -
+//  NAME BASED ICONS
+// - - - - - - - - -
+
+// APACHE
+@include icon-set('mime.types', 'config', $grey-light);
+
+// CI
+@include icon-set('Jenkinsfile', 'jenkins', $red);
+
+// BABEL
+@include icon-set('.babelrc', 'babel', $yellow);
+@include icon-set('.babelrc.js', 'babel', $yellow);
+@include icon-set('.babelrc.cjs', 'babel', $yellow);
+@include icon-set('babel.config.js', 'babel', $yellow);
+@include icon-set('babel.config.json', 'babel', $yellow);
+@include icon-set('babel.config.cjs', 'babel', $yellow);
+
+// BOWER
+@include icon-set('bower.json', 'bower', $orange);
+@include icon-set('Bower.json', 'bower', $orange);
+@include icon-set('.bowerrc', 'bower', $orange);
+
+// BOWER
+@include icon-partial('dockerfile', 'docker', $blue);
+@include icon-partial('Dockerfile', 'docker', $blue);
+@include icon-partial('DOCKERFILE', 'docker', $blue);
+@include icon-partial('.dockerignore', 'docker', $grey);
+@include icon-partial('docker-healthcheck', 'docker', $green);
+@include icon-partial('docker-compose.yml', 'docker', $pink);
+@include icon-partial('docker-compose.yaml', 'docker', $pink);
+@include icon-partial('docker-compose.override.yml', 'docker', $pink);
+@include icon-partial('docker-compose.override.yaml', 'docker', $pink);
+
+// BABEL
+@include icon-set('.codeclimate.yml', 'code-climate', $green);
+
+// ESLINT
+@include icon-set('.eslintrc', 'eslint', $purple);
+@include icon-set('.eslintrc.js', 'eslint', $purple);
+@include icon-set('.eslintrc.yaml', 'eslint', $purple);
+@include icon-set('.eslintrc.yml', 'eslint', $purple);
+@include icon-set('.eslintrc.json', 'eslint', $purple);
+@include icon-set('.eslintignore', 'eslint', $grey);
+
+// FIREBASE
+@include icon-set('.firebaserc', 'firebase', $orange);
+@include icon-set('firebase.json', 'firebase', $orange);
+
+// GECKODRIVER
+@include icon-set('geckodriver', 'firefox', $orange);
+
+// GRUNT
+@include icon-set('Gruntfile.js', 'grunt', $orange);
+@include icon-set('gruntfile.babel.js', 'grunt', $orange);
+@include icon-set('Gruntfile.babel.js', 'grunt', $orange);
+@include icon-set('gruntfile.js', 'grunt', $orange);
+@include icon-set('Gruntfile.coffee', 'grunt', $orange);
+@include icon-set('gruntfile.coffee', 'grunt', $orange);
+
+// GULP
+@include icon-partial('GULPFILE', 'gulp', $red);
+@include icon-partial('Gulpfile', 'gulp', $red);
+@include icon-partial('gulpfile', 'gulp', $red);
+//@include icon-partial("gulpfile.js", "gulp", $red);
+//@include icon-partial("gulpfile.babel.js", "gulp", $red);
+
+// IONIC
+@include icon-set('ionic.config.json', 'ionic', $blue);
+@include icon-set('Ionic.config.json', 'ionic', $blue);
+@include icon-set('ionic.project', 'ionic', $blue);
+@include icon-set('Ionic.project', 'ionic', $blue);
+
+// JSHINT
+@include icon-set('.jshintrc', 'javascript', $blue);
+@include icon-set('.jscsrc', 'javascript', $blue);
+
+@include icon-set('platformio.ini', 'platformio', $orange);
+
+// ROLLUP
+@include icon-set('rollup.config.js', 'rollup', $red);
+
+// SASS LINT
+@include icon-set('sass-lint.yml', 'sass', $pink);
+
+// STYLELINT
+@include icon-set('.stylelintrc', 'stylelint', $white);
+@include icon-set('.stylelintrc.json', 'stylelint', $white);
+@include icon-set('.stylelintrc.yaml', 'stylelint', $white);
+@include icon-set('.stylelintrc.yml', 'stylelint', $white);
+@include icon-set('.stylelintrc.js', 'stylelint', $white);
+@include icon-set('.stylelintignore', 'stylelint', $grey);
+@include icon-set('stylelint.config.js', 'stylelint', $white);
+
+// YARN
+@include icon-set('yarn.clean', 'yarn', $blue);
+@include icon-set('yarn.lock', 'yarn', $blue);
+
+// WEBPACK
+@include icon-set('webpack.config.js', 'webpack', $blue);
+@include icon-set('webpack.config.build.js', 'webpack', $blue);
+@include icon-set('webpack.common.js', 'webpack', $blue);
+@include icon-set('webpack.dev.js', 'webpack', $blue);
+@include icon-set('webpack.prod.js', 'webpack', $blue);
+
+// MISC SETTING
+@include icon-set('.direnv', 'config', $grey-light);
+@include icon-set('.env', 'config', $grey-light);
+@include icon-set('.static', 'config', $grey-light);
+@include icon-set('.editorconfig', 'config', $grey-light);
+@include icon-set('.slugignore', 'config', $grey-light);
+@include icon-set('.tmp', 'clock', $grey-light);
+@include icon-set('.htaccess', 'config', $grey-light);
+@include icon-set('.key', 'lock', $green);
+@include icon-set('.cert', 'lock', $green);
+
+// LICENSE FILES
+@include icon-partial('LICENSE', 'license', $yellow);
+@include icon-partial('LICENCE', 'license', $yellow);
+@include icon-partial('COPYING', 'license', $yellow);
+@include icon-partial('COMPILING', 'license', $orange);
+@include icon-partial('CONTRIBUTING', 'license', $red);
+
+// MAKEFILES
+@include icon-partial('MAKEFILE', 'makefile', $orange);
+@include icon-partial('Makefile', 'makefile', $orange);
+@include icon-partial('makefile', 'makefile', $orange);
+@include icon-partial('QMAKEFILE', 'makefile', $purple);
+@include icon-partial('QMakefile', 'makefile', $purple);
+@include icon-partial('qmakefile', 'makefile', $purple);
+@include icon-partial('OMAKEFILE', 'makefile', $grey-light);
+@include icon-partial('OMakefile', 'makefile', $grey-light);
+@include icon-partial('omakefile', 'makefile', $grey-light);
+@include icon-partial('CMAKELISTS.TXT', 'makefile', $blue);
+@include icon-partial('CMAKELISTS.txt', 'makefile', $blue);
+@include icon-partial('CMakeLists.txt', 'makefile', $blue);
+@include icon-partial('cmakelists.txt', 'makefile', $blue);
+
+// PROCFILE
+@include icon-partial('Procfile', 'heroku', $purple);
+
+// TODO
+@include icon-partial('TODO', 'todo', $blue);
+
+// - - - - - - -
+// IGNORED FILES
+// - - - - - - -
+
+@include icon-set('npm-debug.log', 'npm_ignored', $ignore);
+@include icon-set('.DS_Store', 'ignored', $ignore);
